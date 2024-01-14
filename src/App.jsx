@@ -1,17 +1,12 @@
-import React from 'react'
-import LoginCard from './login/components/LoginCard'
+import { useState } from 'react'
 import TodoCard from './mainpage/components/TodoCard'
 import Navbar from './mainpage/components/Navbar'
+import Mainpage from './mainpage/Mainpage'
+import Login from './login/Login'
 
 
-function App() {
-  return (
-    <div className='flex h-screen justify-center items-center'>
-          {/* <LoginCard/> */}
-          <Navbar />
-          {/* <TodoCard/> */}
-    </div>
-  )
+export default function App() {
+  const [authorized,setAuthorized] = useState(false)
+  const [mail,setMail] = useState('')
+  return authorized ? <Mainpage setAuthorized={setAuthorized} mail = {mail}/> : <Login setAuthorized = {setAuthorized} mail = {mail} setMail={setMail}/> 
 }
-
-export default App
