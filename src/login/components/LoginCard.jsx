@@ -3,7 +3,7 @@ import { useState } from 'react'
 export default function LoginCard({ setAuthorized, mail, setMail }) {
   const [isValid, setIsValid] = useState(false)
   return (
-    <form className='w-full max-w-[700px] mx-auto p-4 md:p-8 shadow-md shadow-zinc-300 rounded-[13px]'>
+    <form className='flex flex-col items-center justify-center w-screen sm:w-[700px] h-screen sm:h-[310px] shadow-md shadow-zinc-300 md:rounded-[13px]'>
       <h1 className='text-2xl md:text-3xl lg:text-4xl font-bold mb-5 text-center'>LOGIN FORM</h1>
       <div className='mb-4'>
       
@@ -27,7 +27,7 @@ export default function LoginCard({ setAuthorized, mail, setMail }) {
         onClick={() => {
           setAuthorized(isValid);
         }}
-        className={`w-full ${isValid ? "bg-[#f6b819] hover:bg-yellow-700" : "bg-[#d7d7d7] text-[#A4A4A4] pointer-events-none"} py-2 px-4 rounded-[10px] text-base md:text-lg`}
+        className={` ${isValid ? "bg-[#f6b819] hover:bg-yellow-700" : "bg-[#d7d7d7] text-[#A4A4A4] pointer-events-none"} py-2 px-4 rounded-[10px] text-base md:text-lg`}
         type='submit'
       >
         Submit

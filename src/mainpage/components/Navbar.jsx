@@ -10,7 +10,7 @@ function Navbar({setAuthorized , mail}) {
             onClick={() =>{
                 setAuthorized(false)
               }}
-             className='w-full md:max-w-[202px] max-h-[61px] md:ml-4 bg-yellow-500 py-2 px-4 rounded-[10px] hover:bg-yellow-700 focus:outline-none focus:ring focus:border-yellow-700 transition-all duration-300' type='submit'>
+             className='w-screen  md:max-w-[202px] max-h-[61px] md:ml-4 bg-yellow-500 py-2 px-4 md:rounded-[8px] hover:bg-yellow-700 focus:outline-none focus:ring focus:border-yellow-700 transition-all duration-300' type='submit'>
                 Log Out
             </button>
         </nav>

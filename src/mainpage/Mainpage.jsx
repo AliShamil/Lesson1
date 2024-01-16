@@ -10,9 +10,9 @@ function Mainpage({setAuthorized , mail}) {
   const [isEditOpened, openEditModal] = useState(false)
   const [isDeleteOpened, openDeleteModal] = useState(false)
   return (
-    <>
+    <div className={`relative ${isDeleteOpened || isCreateOpened || isEditOpened ? 'overflow-hidden' : ''}`}>
       <Navbar setAuthorized={setAuthorized} mail={mail}/>
-      <main className='mx-8 my-5'>
+      <main className='mx-5 my-5'>
 
       <button
             onClick={(e)=>{
@@ -49,7 +49,7 @@ function Mainpage({setAuthorized , mail}) {
         </div>
       )}
   
-    </>
+    </div>
   )
 }
 

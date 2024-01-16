@@ -15,17 +15,17 @@ function TodoCard({openEditModal,openDeleteModal}) {
           anim id est laborum.
         </p>
       </div>
-      <div className='flex bg-[#d9d9d9] justify-end items-center p-2'>
+      <div className='flex justify-center flex-col sm:flex-row sm:justify-end items-center rounded-b-[7px] p-4 bg-zinc-300 h-auto'>
         <button 
         onClick={()=>{
           openEditModal(true)
         }}
-        className='bg-yellow-500 py-1 px-3 md:py-2 md:px-5 rounded-[5px] font-bold hover:bg-yellow-600'>Edit</button>
+        className='mx-3 sm:mx-1 text-lg w-full sm:w-auto font-bold rounded-[7px] h-3/5 py-2 px-6 bg-[#f6b819] hover:bg-yellow-700'>Edit</button>
         <button 
          onClick={()=>{
           openDeleteModal(true)
         }}
-        className='bg-yellow-500 py-1 px-3 md:py-2 md:px-5 rounded-[5px] font-bold mx-2 hover:bg-yellow-600'>Delete</button>
+        className='mx-3 sm:mx-1 mt-4 sm:mt-0 text-lg w-full sm:w-auto font-bold rounded-[7px] h-3/5 py-2 px-5 bg-[#f6b819] hover:bg-yellow-700'>Delete</button>
       </div>
     </div>
   </div>
