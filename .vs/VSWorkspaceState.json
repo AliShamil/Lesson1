@@ -1,6 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\src",
+    "\\src\\mainpage",
+    "\\src\\mainpage\\components"
   ],
+  "SelectedNode": "\\src\\mainpage\\components\\Navbar.jsx",
   "PreviewInSolutionExplorer": false
 }

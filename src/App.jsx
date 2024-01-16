@@ -1,6 +1,4 @@
 import { useState } from 'react'
-import TodoCard from './mainpage/components/TodoCard'
-import Navbar from './mainpage/components/Navbar'
 import Mainpage from './mainpage/Mainpage'
 import Login from './login/Login'
 

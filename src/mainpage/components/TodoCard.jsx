@@ -1,6 +1,6 @@
 import React from 'react'
 
-function TodoCard() {
+function TodoCard({openEditModal,openDeleteModal}) {
   return (
     <>
   <div className='max-w-[560px] w-full md:mr-8 my-5'>
@@ -16,8 +16,16 @@ function TodoCard() {
         </p>
       </div>
       <div className='flex bg-[#d9d9d9] justify-end items-center p-2'>
-        <button className='bg-yellow-500 py-1 px-3 md:py-2 md:px-5 rounded-[5px] font-bold hover:bg-yellow-600'>Edit</button>
-        <button className='bg-yellow-500 py-1 px-3 md:py-2 md:px-5 rounded-[5px] font-bold mx-2 hover:bg-yellow-600'>Delete</button>
+        <button 
+        onClick={()=>{
+          openEditModal(true)
+        }}
+        className='bg-yellow-500 py-1 px-3 md:py-2 md:px-5 rounded-[5px] font-bold hover:bg-yellow-600'>Edit</button>
+        <button 
+         onClick={()=>{
+          openDeleteModal(true)
+        }}
+        className='bg-yellow-500 py-1 px-3 md:py-2 md:px-5 rounded-[5px] font-bold mx-2 hover:bg-yellow-600'>Delete</button>
       </div>
     </div>
   </div>

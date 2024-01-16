@@ -1,12 +1,13 @@
 import React from 'react'
 import { useState } from 'react'
-function LoginCard({ setAuthorized, mail, setMail }) {
+export default function LoginCard({ setAuthorized, mail, setMail }) {
   const [isValid, setIsValid] = useState(false)
   return (
     <form className='w-full max-w-[700px] mx-auto p-4 md:p-8 shadow-md shadow-zinc-300 rounded-[13px]'>
       <h1 className='text-2xl md:text-3xl lg:text-4xl font-bold mb-5 text-center'>LOGIN FORM</h1>
       <div className='mb-4'>
-        <label htmlFor="email" className='text-sm md:text-base lg:text-lg'>Email:</label>
+      
+        <label htmlFor="email" className={`${isValid ? 'text-zinc-400 ' : 'text-red-400 '} md:text-base lg:text-lg`}>Email:</label>
         <input
           id="email"
           onChange={(e) => {
@@ -16,7 +17,8 @@ function LoginCard({ setAuthorized, mail, setMail }) {
           required={true}
           value={mail}
           placeholder='example@example.com'
-          className='w-full border border-zinc-300 rounded-[5px] my-2 p-2 text-base md:text-lg'
+          
+          className={`${isValid ? 'border-zinc-300' : 'bg-red-200 text-red-400 placeholder-red-400'} w-full border rounded-[5px] my-2 p-2 md:text-lg`}
           type="email"
         />
       </div>
@@ -25,7 +27,7 @@ function LoginCard({ setAuthorized, mail, setMail }) {
         onClick={() => {
           setAuthorized(isValid);
         }}
-        className={`w-full ${isValid ? "bg-yellow-500 hover:bg-amber-400" : "bg-slate-500"} py-2 px-4 rounded-[10px] text-base md:text-lg`}
+        className={`w-full ${isValid ? "bg-[#f6b819] hover:bg-yellow-700" : "bg-[#d7d7d7] text-[#A4A4A4] pointer-events-none"} py-2 px-4 rounded-[10px] text-base md:text-lg`}
         type='submit'
       >
         Submit
@@ -35,4 +37,3 @@ function LoginCard({ setAuthorized, mail, setMail }) {
   )
 }
 
-export default LoginCard
