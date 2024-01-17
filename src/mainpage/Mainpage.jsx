@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useState , useEffect} from 'react'
 import Navbar from './components/Navbar'
 import TodoCard from './components/TodoCard'
 import CreateCard from './components/CreateCard'
@@ -6,46 +6,60 @@ import EditCard from './components/EditCard'
 import DeleteCard from './components/DeleteCard'
 
 function Mainpage({setAuthorized , mail}) {
-  const [isCreateOpened, openCreateModal] = useState(false)
-  const [isEditOpened, openEditModal] = useState(false)
-  const [isDeleteOpened, openDeleteModal] = useState(false)
+  const [cards,setCards] = useState([]);
+  const [filteredCards,setfilteredCards] = useState([]);
+  const [activeCard, setActiveCard] = useState();
+  const [openModal, setOpenModal] = useState("");
+
+  useEffect(()=>{
+    setfilteredCards(cards.filter((card)=> card.author === mail));
+  },[cards])
+
   return (
-    <div className={`relative ${isDeleteOpened || isCreateOpened || isEditOpened ? 'overflow-hidden' : ''}`}>
+    <div className={`h-screen relative ${openModal ? 'overflow-hidden' : ''}`}>
       <Navbar setAuthorized={setAuthorized} mail={mail}/>
       <main className='mx-5 my-5'>
 
       <button
             onClick={(e)=>{
-              openCreateModal(true)
+              setOpenModal("create")
             }}
        className='w-full md:w-fit bg-yellow-400 py-3 px-10 font-bold rounded-[8px] hover:bg-yellow-500 '>Create card</button>
-      <div className='flex flex-wrap px-15'>
-        <TodoCard openEditModal={openEditModal} openDeleteModal={openDeleteModal}/>
-        <TodoCard openEditModal={openEditModal} openDeleteModal={openDeleteModal}/>
-        <TodoCard openEditModal={openEditModal} openDeleteModal={openDeleteModal}/>
-        <TodoCard openEditModal={openEditModal} openDeleteModal={openDeleteModal}/>
+      <div className='grid lg:grid-cols-3 md:grid-cols-2 px-15'>
+       {filteredCards.length?(
+        filteredCards.map((card) => (
+<TodoCard key={card.id} data={card} setOpenModal={setOpenModal} setActiveCard={setActiveCard}/>
+        ))
+       ) :(
+        <p className='text-center col-span-3 mt-10'>No cards found</p>
+       )
+
+       }
+       
+        
+
       </div>
       </main>
 
-      {isDeleteOpened && 
+      {openModal==="delete" && 
       (
         <div className='flex items-center justify-center bg-gray-900 bg-opacity-85 fixed top-0 left-0 w-full h-full '>
-          <DeleteCard openDeleteModal={openDeleteModal} />
+          <DeleteCard setCards={setCards} setOpenModal={setOpenModal} />
         </div>
       )}
       
       {
-      isCreateOpened && 
+      openModal==="create" && 
       (
         <div className='flex items-center justify-center bg-gray-900 bg-opacity-85 fixed top-0 left-0 w-full h-full '>
-          <CreateCard openCreateModal={openCreateModal} />
+          <CreateCard setCards={setCards} setOpenModal={setOpenModal} mail={mail}/>
         </div>
       )}
       
-      {isEditOpened && 
+      {openModal==="edit" && 
       (
         <div className='flex items-center justify-center bg-gray-900 bg-opacity-85 fixed top-0 left-0 w-full h-full '>
-          <EditCard openEditModal={openEditModal} />
+          <EditCard setCards={setCards} setOpenModal={setOpenModal} />
         </div>
       )}
   

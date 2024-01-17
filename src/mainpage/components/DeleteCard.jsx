@@ -1,6 +1,6 @@
 import React from 'react'
 
-function DeleteCard({openDeleteModal}) {
+function DeleteCard({setOpenModal, setCards}) {
   const handleSubmit = (e) => {
     e.preventDefault();
 }
@@ -9,7 +9,7 @@ function DeleteCard({openDeleteModal}) {
     <div className='w-[100%]'>
         <button className='w-4 h-4 bg-red-600 rounded-full absolute top-[10px] right-[10px]' 
         onClick={()=>{
-            openDeleteModal(false)
+          setOpenModal("")
           }}></button>
     </div>
       <h1 className='text-3xl font-bold mb-8 md:mb-5'>DELETE CARD</h1>
@@ -17,7 +17,7 @@ function DeleteCard({openDeleteModal}) {
         <div className='flex justify-center h-[20%] items-center md:mt-5'>
           <button className='border border-zinc-300 py-2 px-5 rounded-[5px] font-bold hover:bg-[#9D9D9D]'
           onClick={()=>{
-            openDeleteModal(false)
+            setOpenModal("")
           }}
           >Close</button>
           <button onClick={handleSubmit} className='bg-yellow-400 py-2 px-5 rounded-[5px] font-bold mx-3 hover:bg-[#F6AB1A]'>Delete</button>
