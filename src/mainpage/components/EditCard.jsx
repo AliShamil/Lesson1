@@ -1,7 +1,25 @@
-import React from 'react'
+import { useState } from 'react'
 
-function EditCard({ setOpenModal, setCards }) {
-  
+function EditCard({ setOpenModal, setCards,activeCard }) {
+  const [formData, setFormData] = useState({
+    title: activeCard.title,
+    description: activeCard.description,
+});
+
+const handleSave = (e) => {
+    e.preventDefault()
+    const updatedCard = { ...activeCard, ...formData };
+    setCards((prevValue) => prevValue.map(card => card.id === activeCard.id ? updatedCard : card))
+    setOpenModal('');
+};
+
+const handleChange = (e) => {
+  const { name, value } = e.target;
+  setFormData(prevData => ({
+      ...prevData,
+      [name]: value,
+  }));
+};
   return (
     <form action="" className='flex flex-col text-center sm:text-left items-center w-screen h-screen md:w-[700px] md:h-[350px] justify-center md:rounded-[13px] bg-white relative'>
       <div className='w-[100%]'>
@@ -13,16 +31,16 @@ function EditCard({ setOpenModal, setCards }) {
       <h1 className='text-3xl font-bold mb-5'>EDIT CARD</h1>
       <div className='flex flex-col w-[80%]'>
         <label htmlFor="" className='text-zinc-600 text-lg'>Title:</label>
-        <input required className='border border-zinc-300 my-2 h-[40px] p-1 rounded-[6px]' />
+        <input onChange={(e) => handleChange(e)} value={formData.title} required className='border border-zinc-300 my-2 h-[40px] p-1 rounded-[6px]'  type="text" name="title"  />
         <label htmlFor="" className='text-zinc-600 text-lg'>Description:</label>
-        <input required className='border border-zinc-300 rounded-[6px] my-2 h-[40px] p-1' />
+        <input onChange={(e) => handleChange(e)} value={formData.description} required className='border border-zinc-300 rounded-[6px] my-2 h-[40px] p-1' type="text" name="description" id=""/>
         <div className='flex md:justify-end  justify-center  h-[20%] items-center mt-[10px]'>
           <button className='border border-zinc-300 py-2 px-5 rounded-[5px] font-bold hover:bg-[#DFDFDF]'
             onClick={() => {
               setOpenModal("")
             }}>Close</button>
 
-          <button className='bg-yellow-400 py-2 px-5 rounded-[5px] font-bold mx-3 hover:bg-[#F6AB1A]'>Save</button>
+          <button onClick={(e) => handleSave(e)} className='bg-yellow-400 py-2 px-5 rounded-[5px] font-bold mx-3 hover:bg-[#F6AB1A]'>Save</button>
         </div>
       </div>
     </form>

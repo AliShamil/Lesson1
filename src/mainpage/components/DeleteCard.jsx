@@ -1,8 +1,8 @@
-import React from 'react'
-
-function DeleteCard({setOpenModal, setCards}) {
+function DeleteCard({setOpenModal, setCards, activeCard}) {
   const handleSubmit = (e) => {
     e.preventDefault();
+    setCards((prevCards) => prevCards.filter(card => card.id != activeCard.id))
+    setOpenModal('')
 }
   return (
     <form action="" className='flex flex-col items-center w-screen h-screen md:w-[700px] md:h-[200px] justify-center md:rounded-[13px] bg-white relative'>
@@ -20,7 +20,7 @@ function DeleteCard({setOpenModal, setCards}) {
             setOpenModal("")
           }}
           >Close</button>
-          <button onClick={handleSubmit} className='bg-yellow-400 py-2 px-5 rounded-[5px] font-bold mx-3 hover:bg-[#F6AB1A]'>Delete</button>
+          <button onClick={(e) => handleSubmit(e)} className='bg-yellow-400 py-2 px-5 rounded-[5px] font-bold mx-3 hover:bg-[#F6AB1A]'>Delete</button>
         </div>
       
     </form>
