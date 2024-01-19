@@ -1,6 +1,6 @@
 import {useState} from 'react'
 import { v4 as uuidv4 } from 'uuid';
-export default function CreateCard({setOpenModal, setCards,mail}) {
+export default function CreateCard({dispatch, setCards,mail}) {
   const [formData, setFormData] = useState({});
   const handleChange = (e) =>{
     const {name ,value} = e.target;
@@ -16,7 +16,7 @@ export default function CreateCard({setOpenModal, setCards,mail}) {
     e.preventDefault();
     setCards((prevValue) => [...prevValue, formData]);
     console.log(formData)
-    setOpenModal("");
+    dispatch({ type: "reset" });
   };
   return (
     <>
@@ -24,7 +24,7 @@ export default function CreateCard({setOpenModal, setCards,mail}) {
         <div className='w-[100%]'>
             <button className='w-4 h-4 bg-red-600 rounded-full absolute top-[10px] right-[10px]' 
             onClick={()=>{
-              setOpenModal("")
+              dispatch({ type: "reset" });
               }}></button>
         </div>
           <h1 className='text-3xl font-bold mb-5'>CREATE CARD</h1>
@@ -45,7 +45,7 @@ export default function CreateCard({setOpenModal, setCards,mail}) {
             <div className='flex  h-[20%] md:justify-end  justify-center items-center mt-[10px]'>
               <button className='border border-zinc-200 py-2 px-5 rounded-[5px] font-bold hover:bg-[#DFDFDF]'
               onClick={()=>{
-                setOpenModal("")
+                dispatch({ type: "reset" });
               }}>Close</button>
               <button onClick={(e) =>{
                 createCard(e);

@@ -1,15 +1,32 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext, useReducer } from 'react'
 import Navbar from './components/Navbar'
 import TodoCard from './components/TodoCard'
 import CreateCard from './components/CreateCard'
 import EditCard from './components/EditCard'
 import DeleteCard from './components/DeleteCard'
+import Context from '../ContextWrapper'
 
-function Mainpage({ setAuthorized, mail }) {
+function Mainpage() {
+  const reducer = (state, action) => {
+    switch (action.type) {
+      case "create":
+        return {type: state.type = "create"}
+      case "edit":
+        return {type: state.type = "edit"}
+      case "delete":
+        return {type: state.type = "delete"}
+      case "reset":
+        return {type: state.type = ""}
+      default:
+        return state;
+    }
+  }
+  const { mail } = useContext(Context);
   const [cards, setCards] = useState([]);
   const [filteredCards, setfilteredCards] = useState([]);
   const [activeCard, setActiveCard] = useState();
   const [openModal, setOpenModal] = useState("");
+  const [state, dispatch] = useReducer(reducer, { type: "" });
 
   useEffect(() => {
     setfilteredCards(cards.filter((card) => card.author === mail));
@@ -17,18 +34,19 @@ function Mainpage({ setAuthorized, mail }) {
 
   return (
     <div className={`h-screen relative ${openModal ? 'overflow-hidden' : ''}`}>
-      <Navbar setAuthorized={setAuthorized} mail={mail} />
+      <Navbar />
       <main className='mx-5 my-5'>
 
         <button
-          onClick={(e) => {
-            setOpenModal("create")
+          onClick={() => {
+            dispatch({ type: "create" })
+
           }}
           className='w-full md:w-fit bg-yellow-400 py-3 px-10 font-bold rounded-[8px] hover:bg-yellow-500 '>Create card</button>
         <div className='grid lg:grid-cols-3 md:grid-cols-2 px-15'>
           {filteredCards.length ? (
             filteredCards.map((card) => (
-              <TodoCard key={card.id} data={card} setOpenModal={setOpenModal} setActiveCard={setActiveCard} />
+              <TodoCard key={card.id} data={card} dispatch={dispatch} setActiveCard={setActiveCard} />
             ))
           ) : (
             <p className='text-center col-span-3 mt-10'>No cards found</p>
@@ -41,25 +59,26 @@ function Mainpage({ setAuthorized, mail }) {
         </div>
       </main>
 
-      {openModal === "delete" &&
+
+      {state.type === "delete" &&
         (
           <div className='flex items-center justify-center bg-gray-900 bg-opacity-85 fixed top-0 left-0 w-full h-full '>
-            <DeleteCard activeCard={activeCard} setCards={setCards} setOpenModal={setOpenModal} />
+            <DeleteCard activeCard={activeCard} dispatch={dispatch} setCards={setCards}  />
           </div>
         )}
 
       {
-        openModal === "create" &&
+        state.type === "create" &&
         (
           <div className='flex items-center justify-center bg-gray-900 bg-opacity-85 fixed top-0 left-0 w-full h-full '>
-            <CreateCard setCards={setCards} setOpenModal={setOpenModal} mail={mail} />
+            <CreateCard setCards={setCards} dispatch={dispatch}  mail={mail} />
           </div>
         )}
 
-      {openModal === "edit" &&
+      {state.type === "edit" &&
         (
           <div className='flex items-center justify-center bg-gray-900 bg-opacity-85 fixed top-0 left-0 w-full h-full '>
-            <EditCard activeCard={activeCard} setCards={setCards} setOpenModal={setOpenModal} />
+            <EditCard activeCard={activeCard} dispatch={dispatch} setCards={setCards}  />
           </div>
         )}
 

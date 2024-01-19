@@ -1,10 +1,10 @@
-import React from 'react'
 import LoginCard from './components/LoginCard'
 
-export default function Login({setAuthorized,mail,setMail}) {
+export default function Login() {
+  
   return (
     <div className='flex justify-center items-center h-screen'>
-      <LoginCard setAuthorized = {setAuthorized} mail = {mail} setMail={setMail}/>
+      <LoginCard />
     </div>
   )
 }

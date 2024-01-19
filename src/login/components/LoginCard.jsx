@@ -1,12 +1,14 @@
 import React from 'react'
-import { useState } from 'react'
-export default function LoginCard({ setAuthorized, mail, setMail }) {
+import { useState, useContext } from 'react'
+import Context from '../../ContextWrapper';
+export default function LoginCard() {
   const [isValid, setIsValid] = useState(false)
+  const { mail, setAuthorized, setMail } = useContext(Context);
   return (
     <form className='flex flex-col items-center justify-center w-screen sm:w-[700px] h-screen sm:h-[310px] shadow-md shadow-zinc-300 md:rounded-[13px]'>
       <h1 className='text-2xl md:text-3xl lg:text-4xl font-bold mb-5 text-center'>LOGIN FORM</h1>
       <div className='mb-4'>
-      
+
         <label htmlFor="email" className={`${isValid ? 'text-zinc-400 ' : 'text-red-400 '} md:text-base lg:text-lg`}>Email:</label>
         <input
           id="email"
@@ -17,7 +19,7 @@ export default function LoginCard({ setAuthorized, mail, setMail }) {
           required={true}
           value={mail}
           placeholder='example@example.com'
-          
+
           className={`${isValid ? 'border-zinc-300' : 'bg-red-200 text-red-400 placeholder-red-400'} w-full border rounded-[5px] my-2 p-2 md:text-lg`}
           type="email"
         />
